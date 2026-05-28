@@ -9,18 +9,24 @@ import {
 } from "lucide-react";
 
 async function getContributors() {
-  const res = await fetch(
-    "https://api.github.com/repos/knoxiboy/DoubtDesk/contributors",
-    {
-      next: { revalidate: 3600 },
+  try {
+    const res = await fetch(
+      "https://api.github.com/repos/knoxiboy/DoubtDesk/contributors",
+      {
+        next: { revalidate: 3600 },
+      }
+    );
+
+    if (!res.ok) {
+      console.error("Failed to fetch contributors:", res.status);
+      return [];
     }
-  );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch contributors");
+    return res.json();
+  } catch (error) {
+    console.error("Unhandled promise rejection in getContributors:", error);
+    return [];
   }
-
-  return res.json();
 }
 
 const stats = [

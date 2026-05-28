@@ -5,7 +5,7 @@ import DoubtCard from "@/components/DoubtCard";
 import useSWRInfinite from "swr/infinite";
 import ScrollToTopButton from "./ScrollToTopButton";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = (url: string) => fetch(url).then((res) => res.json()).catch((err) => { console.error(err); throw err; });
 
 interface InfiniteDoubtFeedProps {
     classroomId?: number;

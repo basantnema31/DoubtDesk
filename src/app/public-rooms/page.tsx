@@ -35,7 +35,7 @@ export default function PublicRoomsPage() {
 
     const sort = (searchParams.get("sort") as DoubtSortValue) || "newest";
 
-    const fetcher = (url: string) => fetch(url).then(res => res.json());
+    const fetcher = (url: string) => fetch(url).then(res => res.json()).catch((err) => { console.error(err); throw err; });
 
     const updateSort = (nextSort: DoubtSortValue) => {
         const params = new URLSearchParams(searchParams.toString());

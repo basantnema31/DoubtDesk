@@ -20,7 +20,7 @@ interface Notification extends NotificationRecord {
     createdAt: string;
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = (url: string) => fetch(url).then((res) => res.json()).catch((err) => { console.error(err); throw err; })
 
 export default function NotificationBell() {
     const [isOpen, setIsOpen] = useState(false)
